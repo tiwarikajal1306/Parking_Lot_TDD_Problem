@@ -17,5 +17,9 @@ public class ParkingLotSystem {
             return true;
         return false;
     }
+
+    public void unPark(String car) {
+
+    }
 }
 
