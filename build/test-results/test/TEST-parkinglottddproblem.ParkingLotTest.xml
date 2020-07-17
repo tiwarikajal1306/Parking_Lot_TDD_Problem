@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="parkinglottddproblem.ParkingLotTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-07-17T20:04:17" hostname="KAJAL-LAPTOP" time="0.004">
+<testsuite name="parkinglottddproblem.ParkingLotTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2020-07-17T22:02:07" hostname="KAJAL-LAPTOP" time="0.011">
   <properties/>
-  <testcase name="givenVehicle_WhenUnParked_ShouldReturnFalse" classname="parkinglottddproblem.ParkingLotTest" time="0.004"/>
-  <system-out><![CDATA[]]></system-out>
+  <testcase name="givenVehicle_WhenParked_ShouldReturnTrue" classname="parkinglottddproblem.ParkingLotTest" time="0.001"/>
+  <testcase name="givenManyVehicles_WhenParkingLotSizeIsFull_ShouldThrowException" classname="parkinglottddproblem.ParkingLotTest" time="0.008"/>
+  <testcase name="givenVehicle_WhenUnParked_ShouldReturnFalse" classname="parkinglottddproblem.ParkingLotTest" time="0.0"/>
+  <system-out><![CDATA[PARKING LOT IS FULL
+]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
