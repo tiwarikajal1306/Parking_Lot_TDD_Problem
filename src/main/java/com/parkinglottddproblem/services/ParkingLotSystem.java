@@ -18,8 +18,9 @@ public class ParkingLotSystem {
         return false;
     }
 
-    public void unPark(String car) {
-
+    public void unPark(String vehicle) {
+        if (parkingLot.contains(vehicle))
+            parkingLot.remove(vehicle);
     }
 }
 
