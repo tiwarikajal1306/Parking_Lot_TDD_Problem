@@ -6,7 +6,7 @@ import org.junit.Test;
 
 public class ParkingLotTest {
 
-ParkingLotSystem parkingLotSystem;
+ParkingLotSystem parkingLotSystem = new ParkingLotSystem();
 
 @Test
     public void givenAVehicle_WhenParked_ShouldReturnTrue() {
