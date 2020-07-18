@@ -42,14 +42,18 @@ public class ParkingLotTest {
     @Test
     public void givenParingLot_WhenFull_ShouldRedirect_SecurityStaff() throws ParkingLotException {
         AirportSecurity airportSecurity = new AirportSecurity();
-        parkingLotSystem.park("Tata Indigo CS");
-        parkingLotSystem.park("Toyota Fortuner");
-        parkingLotSystem.park("Maruti Swift Dzire");
-        parkingLotSystem.park("Tata Hexa");
-        parkingLotSystem.park("Maruti 800");
-        parkingLotSystem.park("Suzuki Nexa");
-         boolean slotCheck = parkingLotSystem.isSlotFull();
-        boolean result = airportSecurity.redirectSecurityStaff();
-        Assert.assertTrue(result);
+        try {
+            parkingLotSystem.park("Tata Indigo CS");
+            parkingLotSystem.park("Toyota Fortuner");
+            parkingLotSystem.park("Maruti Swift Dzire");
+            parkingLotSystem.park("Tata Hexa");
+            parkingLotSystem.park("Maruti 800");
+            parkingLotSystem.park("Suzuki Nexa");
+//            boolean result = airportSecurity.redirectSecurityStaff();
+//            Assert.assertTrue(result);
+        } catch(ParkingLotException e) {
+            boolean result = airportSecurity.redirectSecurityStaff();
+            Assert.assertTrue(result);
+        }
     }
 }
