@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="parkinglottddproblem.ParkingLotTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2020-07-17T22:02:07" hostname="KAJAL-LAPTOP" time="0.011">
+<testsuite name="parkinglottddproblem.ParkingLotTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2020-07-18T03:00:06" hostname="KAJAL-LAPTOP" time="0.008">
   <properties/>
-  <testcase name="givenVehicle_WhenParked_ShouldReturnTrue" classname="parkinglottddproblem.ParkingLotTest" time="0.001"/>
-  <testcase name="givenManyVehicles_WhenParkingLotSizeIsFull_ShouldThrowException" classname="parkinglottddproblem.ParkingLotTest" time="0.008"/>
+  <testcase name="givenVehicle_WhenParked_ShouldReturnTrue" classname="parkinglottddproblem.ParkingLotTest" time="0.002"/>
+  <testcase name="givenManyVehicles_WhenParkingLotSizeIsFull_ShouldThrowException" classname="parkinglottddproblem.ParkingLotTest" time="0.005"/>
   <testcase name="givenVehicle_WhenUnParked_ShouldReturnFalse" classname="parkinglottddproblem.ParkingLotTest" time="0.0"/>
   <system-out><![CDATA[PARKING LOT IS FULL
 ]]></system-out>

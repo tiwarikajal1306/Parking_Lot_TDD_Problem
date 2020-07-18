@@ -1,6 +1,7 @@
 package parkinglottddproblem;
 
 import com.parkinglottddproblem.exception.ParkingLotException;
+import com.parkinglottddproblem.services.AirportSecurity;
 import com.parkinglottddproblem.services.ParkingLotSystem;
 import org.junit.Assert;
 import org.junit.Test;
@@ -37,6 +38,18 @@ public class ParkingLotTest {
             System.out.println(e.getMessage());
             Assert.assertEquals(ParkingLotException.ExceptionType.PARKING_LOT_FULL, e.type);
         }
-
+    }
+    @Test
+    public void givenParingLot_WhenFull_ShouldRedirect_SecurityStaff() throws ParkingLotException {
+        AirportSecurity airportSecurity = new AirportSecurity();
+        parkingLotSystem.park("Tata Indigo CS");
+        parkingLotSystem.park("Toyota Fortuner");
+        parkingLotSystem.park("Maruti Swift Dzire");
+        parkingLotSystem.park("Tata Hexa");
+        parkingLotSystem.park("Maruti 800");
+        parkingLotSystem.park("Suzuki Nexa");
+         boolean slotCheck = parkingLotSystem.isSlotFull();
+        boolean result = airportSecurity.redirectSecurityStaff();
+        Assert.assertTrue(result);
     }
 }

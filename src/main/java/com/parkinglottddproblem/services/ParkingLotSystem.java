@@ -3,13 +3,14 @@ package com.parkinglottddproblem.services;
 import com.parkinglottddproblem.exception.ParkingLotException;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ParkingLotSystem {
 
     int PARKING_LOT_SIZE = 3;
     public String vehicleName;
-    public List<String> parkingLot = new ArrayList<>();
+    public List<String> parkingLot = new LinkedList<>();
 
     public void park(String vehicle) throws ParkingLotException {
         if (parkingLot.size() >= PARKING_LOT_SIZE)
@@ -28,5 +29,11 @@ public class ParkingLotSystem {
             return true;
         return false;
     }
+
+     public  boolean isSlotFull(){
+         if (parkingLot.size() >= PARKING_LOT_SIZE)
+             return true;
+         return false;
+     }
 }
 
