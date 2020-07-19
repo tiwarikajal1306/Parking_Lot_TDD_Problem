@@ -11,7 +11,6 @@ public class ParkingLotSystem {
 
     public boolean park(String vehicle) throws ParkingLotException {
         if (parkingLot.size() > PARKING_LOT_SIZE)
-            //return false;
             throw new ParkingLotException(ParkingLotException.ExceptionType.PARKING_LOT_FULL, "PARKING LOT IS FULL");
         parkingLot.add(vehicle);
         return true;

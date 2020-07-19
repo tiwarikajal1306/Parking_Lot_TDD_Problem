@@ -2,6 +2,7 @@ package parkinglottddproblem;
 
 import com.parkinglottddproblem.exception.ParkingLotException;
 import com.parkinglottddproblem.services.AirportSecurity;
+import com.parkinglottddproblem.services.ParkingLotOwner;
 import com.parkinglottddproblem.services.ParkingLotSystem;
 import org.junit.Assert;
 import org.junit.Test;
@@ -48,5 +49,16 @@ public class ParkingLotTest {
         parkingLotSystem.park("Tata Hexa");
         boolean result = airportSecurity.redirectSecurityStaff();
         Assert.assertTrue(result);
+    }
+    @Test
+    public void givenParkingLotIsFull_IfItHasSpaceAgain_OwnerShouldShowVacantSign() throws ParkingLotException {
+        ParkingLotOwner parkingLotOwner = new ParkingLotOwner();
+        parkingLotSystem.park("Tata Indigo CS");
+        parkingLotSystem.park("Toyota Fortuner");
+        parkingLotSystem.park("Maruti Swift Dzire");
+        parkingLotSystem.park("Suzuki Nexa");
+        parkingLotSystem.unPark("Suzuki Nexa");
+        ParkingLotOwner.Flag flag = parkingLotOwner.getFlag();
+        Assert.assertEquals(ParkingLotOwner.Flag.PARKING_IS_VACANT, flag);
     }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="parkinglottddproblem.ParkingLotTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-07-19T06:10:01" hostname="KAJAL-LAPTOP" time="0.003">
+<testsuite name="parkinglottddproblem.ParkingLotTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-07-19T07:05:49" hostname="KAJAL-LAPTOP" time="0.005">
   <properties/>
-  <testcase name="givenParingLot_WhenFull_ShouldRedirect_SecurityStaff" classname="parkinglottddproblem.ParkingLotTest" time="0.003"/>
+  <testcase name="givenParkingLotIsFull_IfItHasSpaceAgain_OwnerShouldShowVacantSign" classname="parkinglottddproblem.ParkingLotTest" time="0.005"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
