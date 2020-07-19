@@ -46,7 +46,6 @@ public class ParkingLotTest {
         parkingLotSystem.park("Tata Indigo CS");
         parkingLotSystem.park("Toyota Fortuner");
         parkingLotSystem.park("Maruti Swift Dzire");
-        parkingLotSystem.park("Tata Hexa");
         boolean result = airportSecurity.redirectSecurityStaff();
         Assert.assertTrue(result);
     }
@@ -55,10 +54,19 @@ public class ParkingLotTest {
         ParkingLotOwner parkingLotOwner = new ParkingLotOwner();
         parkingLotSystem.park("Tata Indigo CS");
         parkingLotSystem.park("Toyota Fortuner");
-        parkingLotSystem.park("Maruti Swift Dzire");
         parkingLotSystem.park("Suzuki Nexa");
         parkingLotSystem.unPark("Suzuki Nexa");
-        ParkingLotOwner.Flag flag = parkingLotOwner.getFlag();
+        ParkingLotOwner.Flag flag = parkingLotOwner.getFlag(parkingLotSystem);
         Assert.assertEquals(ParkingLotOwner.Flag.PARKING_IS_VACANT, flag);
+    }
+
+    @Test
+    public void givenParkingLotIsFull_OwnerShouldShowFullSign() throws ParkingLotException {
+        ParkingLotOwner parkingLotOwner = new ParkingLotOwner();
+        parkingLotSystem.park("Tata Indigo CS");
+        parkingLotSystem.park("Toyota Fortuner");
+        parkingLotSystem.park("Maruti Swift Dzire");
+        ParkingLotOwner.Flag flag = parkingLotOwner.getFlag(parkingLotSystem);
+        Assert.assertEquals(ParkingLotOwner.Flag.PARKING_IS_FULL, flag);
     }
 }

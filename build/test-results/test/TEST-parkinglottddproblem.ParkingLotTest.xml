@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="parkinglottddproblem.ParkingLotTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-07-19T07:05:49" hostname="KAJAL-LAPTOP" time="0.005">
+<testsuite name="parkinglottddproblem.ParkingLotTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2020-07-19T09:21:17" hostname="KAJAL-LAPTOP" time="0.051">
   <properties/>
-  <testcase name="givenParkingLotIsFull_IfItHasSpaceAgain_OwnerShouldShowVacantSign" classname="parkinglottddproblem.ParkingLotTest" time="0.005"/>
-  <system-out><![CDATA[]]></system-out>
+  <testcase name="givenVehicle_WhenParked_ShouldReturnTrue" classname="parkinglottddproblem.ParkingLotTest" time="0.01"/>
+  <testcase name="givenParingLot_WhenFull_ShouldRedirect_SecurityStaff" classname="parkinglottddproblem.ParkingLotTest" time="0.009"/>
+  <testcase name="givenParkingLotIsFull_IfItHasSpaceAgain_OwnerShouldShowVacantSign" classname="parkinglottddproblem.ParkingLotTest" time="0.003"/>
+  <testcase name="givenParkingLotIsFull_OwnerShouldShowFullSign" classname="parkinglottddproblem.ParkingLotTest" time="0.0"/>
+  <testcase name="givenManyVehicles_WhenParkingLotSizeIsFull_ShouldThrowException" classname="parkinglottddproblem.ParkingLotTest" time="0.014"/>
+  <testcase name="givenVehicle_WhenUnParked_ShouldReturnFalse" classname="parkinglottddproblem.ParkingLotTest" time="0.001"/>
+  <system-out><![CDATA[PARKING LOT IS FULL
+]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
