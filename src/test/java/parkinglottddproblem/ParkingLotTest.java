@@ -12,17 +12,16 @@ public class ParkingLotTest {
 
     @Test
     public void givenVehicle_WhenParked_ShouldReturnTrue() throws ParkingLotException {
-        parkingLotSystem.park("Car");
-        boolean VehicleParked = parkingLotSystem.isVehicleParked();
-        Assert.assertTrue(VehicleParked);
+        boolean carPark = parkingLotSystem.park("Car");
+        Assert.assertTrue(carPark);
     }
 
     @Test
     public void givenVehicle_WhenUnParked_ShouldReturnFalse() throws ParkingLotException {
         parkingLotSystem.park("Car");
-        parkingLotSystem.unPark("Car");
-        boolean VehicleUnParked = parkingLotSystem.isVehicleParked();
-        Assert.assertFalse(VehicleUnParked);
+        parkingLotSystem.park("Car2");
+        boolean carUnPark = parkingLotSystem.unPark("Car");
+        Assert.assertTrue(carUnPark);
     }
 
     @Test
@@ -39,21 +38,15 @@ public class ParkingLotTest {
             Assert.assertEquals(ParkingLotException.ExceptionType.PARKING_LOT_FULL, e.type);
         }
     }
+
     @Test
     public void givenParingLot_WhenFull_ShouldRedirect_SecurityStaff() throws ParkingLotException {
         AirportSecurity airportSecurity = new AirportSecurity();
-        try {
-            parkingLotSystem.park("Tata Indigo CS");
-            parkingLotSystem.park("Toyota Fortuner");
-            parkingLotSystem.park("Maruti Swift Dzire");
-            parkingLotSystem.park("Tata Hexa");
-            parkingLotSystem.park("Maruti 800");
-            parkingLotSystem.park("Suzuki Nexa");
-//            boolean result = airportSecurity.redirectSecurityStaff();
-//            Assert.assertTrue(result);
-        } catch(ParkingLotException e) {
-            boolean result = airportSecurity.redirectSecurityStaff();
-            Assert.assertTrue(result);
-        }
+        parkingLotSystem.park("Tata Indigo CS");
+        parkingLotSystem.park("Toyota Fortuner");
+        parkingLotSystem.park("Maruti Swift Dzire");
+        parkingLotSystem.park("Tata Hexa");
+        boolean result = airportSecurity.redirectSecurityStaff();
+        Assert.assertTrue(result);
     }
 }

@@ -5,8 +5,6 @@ public class AirportSecurity {
 
     public boolean redirectSecurityStaff() {
         boolean isFull = parkingLotSystem.isSlotFull();
-        if (isFull == true)
-            return true;
-        return false;
+        return isFull == false;
     }
 }
