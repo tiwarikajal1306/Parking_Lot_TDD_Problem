@@ -1,12 +1,19 @@
 package com.parkinglottddproblem.services;
 
-import static com.parkinglottddproblem.services.ParkingLotSystem.parkingLotList;
+public class AirportSecurity implements ParkingLotObserver {
+    private boolean isFullCapacity;
 
-public class AirportSecurity {
-    ParkingLotSystem parkingLotSystem = new ParkingLotSystem();
+    @Override
+    public void capacityIsFull() {
+        isFullCapacity = true;
+    }
 
-    public boolean redirectSecurityStaff() {
-        boolean isFull = parkingLotSystem.isLotFull(parkingLotList);
-        return isFull == false;
+    @Override
+    public void capacityIsAvailable() {
+        isFullCapacity = false;
+    }
+
+    public boolean isCapacityFull() {
+        return this.isFullCapacity;
     }
 }
