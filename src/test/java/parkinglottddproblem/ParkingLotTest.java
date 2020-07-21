@@ -18,7 +18,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void givenVehicle_WhenUnParked_ShouldReturnFalse() throws ParkingLotException {
+    public void givenVehicle_WhenUnParked_ShouldReturnTrue() throws ParkingLotException {
         parkingLotSystem.park("Car");
         parkingLotSystem.park("Car2");
         boolean carUnPark = parkingLotSystem.unPark("Car");
@@ -26,7 +26,15 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void givenManyVehicles_WhenParkingLotSizeIsFull_ShouldThrowException() throws ParkingLotException {
+    public void givenVehicleNotPresent_WhenUnParked_ShouldReturnFalse() throws ParkingLotException {
+        parkingLotSystem.park("Car");
+        parkingLotSystem.park("Car2");
+        boolean carUnPark = parkingLotSystem.unPark("Car3");
+        Assert.assertFalse(carUnPark);
+    }
+
+    @Test
+    public void givenManyVehicles_WhenParkingLotSizeIsFull_ShouldThrowException() {
         try {
             parkingLotSystem.park("Tata Indigo CS");
             parkingLotSystem.park("Toyota Fortuner");
