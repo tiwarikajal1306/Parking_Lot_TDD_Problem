@@ -112,7 +112,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void demo() throws ParkingLotException {
+    public void givenVehicle_ShouldPark_OnAvailableSlot() throws ParkingLotException {
         int emptySlot = parkingLotSystem.getEmptySlots();
         parkingLotSystem.parkVehicle(emptySlot, "vehicle2");
         int emptySlot2 = parkingLotSystem.getEmptySlots();
