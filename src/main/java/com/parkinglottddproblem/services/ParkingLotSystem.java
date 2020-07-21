@@ -64,4 +64,10 @@ private List<ParkingLotObserver> observers;
         this.vehicles = new ArrayList();
         IntStream.range(0, this.actualCapacity).forEach(slots -> vehicles.add(null));
     }
+
+    public int findVehicleLocation(Object vehicle) throws ParkingLotException {
+        if (vehicles.contains(vehicle))
+            return vehicles.indexOf(vehicle);
+        throw new ParkingLotException(ParkingLotException.ExceptionType.NOT_FOUND, " vehicle not found");
+    }
 }

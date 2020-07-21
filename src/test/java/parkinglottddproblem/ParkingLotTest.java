@@ -118,4 +118,21 @@ public class ParkingLotTest {
         int emptySlot2 = parkingLotSystem.getEmptySlots();
         parkingLotSystem.parkVehicle(emptySlot2, "vehicle3");
     }
+
+    @Test
+    public void givenVehicle_WhenParkedShouldFindTheLocation() throws ParkingLotException {
+        parkingLotSystem.parkVehicle(0,"vehicle");
+        int vehicleLocation = parkingLotSystem.findVehicleLocation("vehicle");
+        Assert.assertEquals(0, vehicleLocation);
+    }
+
+    @Test
+    public void givenVehicle_WhenNotFound_ShouldThrowException() {
+        try {
+            parkingLotSystem.findVehicleLocation("vehicle2");
+        } catch (ParkingLotException e) {
+            System.out.println(e.getMessage());
+            Assert.assertEquals(ParkingLotException.ExceptionType.NOT_FOUND, e.type);
+        }
+    }
 }
