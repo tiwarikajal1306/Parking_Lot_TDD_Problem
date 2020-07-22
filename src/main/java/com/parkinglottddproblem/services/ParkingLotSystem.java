@@ -5,12 +5,13 @@ import com.parkinglottddproblem.exception.ParkingLotException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
-
+import java.time.LocalTime;
 public class ParkingLotSystem {
-private int actualCapacity;
-private List vehicles;
-ParkingBill parkingBill = new ParkingBill();
-private List<ParkingLotObserver> observers;
+private final int actualCapacity;
+private List<String> vehicles;
+private final List<ParkingLotObserver> observers;
+public LocalTime parkTime = null;
+public LocalTime unParkTime = null;
 
     public ParkingLotSystem(int capacity) {
         this.observers = new ArrayList<>();
@@ -23,7 +24,7 @@ private List<ParkingLotObserver> observers;
         observers.add(parkingObservers);
     }
 
-    public void parkVehicle(int slotNumber, String vehicle, int arrivingHour) throws ParkingLotException {
+    public void parkVehicle(int slotNumber, String vehicle) throws ParkingLotException {
         if(isVehicleParked(vehicle))
             throw new ParkingLotException(ParkingLotException.ExceptionType.ALREADY_PARKED, "Vehicle already parked");
 
@@ -33,9 +34,8 @@ private List<ParkingLotObserver> observers;
             }
             throw new ParkingLotException(ParkingLotException.ExceptionType.PARKING_LOT_FULL, "Parking Lot Is Full");
         }
-        parkingBill.arrivingHour(arrivingHour);
         this.vehicles.set(slotNumber, vehicle);
-
+        parkTime = LocalTime.now();
     }
 
     public Integer getEmptySlots() {
@@ -50,11 +50,11 @@ private List<ParkingLotObserver> observers;
         return this.vehicles.contains(vehicle);
     }
 
-    public boolean unPark(String vehicle, int departingHour) {
+    public boolean unPark(String vehicle) {
         if (vehicle == null) return false;
         if (this.vehicles.contains(vehicle)) {
             this.vehicles.set(this.vehicles.indexOf(vehicle), null);
-            parkingBill.departureHour(departingHour);
+            unParkTime = LocalTime.now();
             for (ParkingLotObserver observer: observers) {
                 observer.capacityIsAvailable();
             }
@@ -64,11 +64,10 @@ private List<ParkingLotObserver> observers;
     }
 
     public void initializeParkingLot() {
-        this.vehicles = new ArrayList();
         IntStream.range(0, this.actualCapacity).forEach(slots -> vehicles.add(null));
     }
 
-    public int findVehicleLocation(Object vehicle) throws ParkingLotException {
+    public int findVehicleLocation(String vehicle) throws ParkingLotException {
         if (vehicles.contains(vehicle))
             return vehicles.indexOf(vehicle);
         throw new ParkingLotException(ParkingLotException.ExceptionType.NOT_FOUND, " vehicle not found");
