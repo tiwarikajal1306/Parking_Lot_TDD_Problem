@@ -1,6 +1,6 @@
-package com.parkinglottddproblem.services;
+package com.parkinglottddproblem.observer;
 
-public class ParkingLotOwner implements ParkingLotObserver {
+public class AirportSecurity implements ParkingLotObserver {
     private boolean isFullCapacity;
 
     @Override

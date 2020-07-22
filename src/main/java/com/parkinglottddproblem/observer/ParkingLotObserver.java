@@ -1,4 +1,4 @@
-package com.parkinglottddproblem.services;
+package com.parkinglottddproblem.observer;
 
 public interface ParkingLotObserver {
      void capacityIsFull();

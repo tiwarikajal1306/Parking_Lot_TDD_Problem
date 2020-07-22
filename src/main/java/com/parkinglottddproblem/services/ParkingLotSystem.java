@@ -1,6 +1,7 @@
 package com.parkinglottddproblem.services;
 
 import com.parkinglottddproblem.exception.ParkingLotException;
+import com.parkinglottddproblem.observer.ParkingLotObserver;
 
 import java.util.ArrayList;
 import java.util.List;
