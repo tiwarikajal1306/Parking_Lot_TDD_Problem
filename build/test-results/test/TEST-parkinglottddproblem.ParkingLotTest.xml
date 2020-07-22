@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="parkinglottddproblem.ParkingLotTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-07-21T20:49:14" hostname="KAJAL-LAPTOP" time="0.01">
+<testsuite name="parkinglottddproblem.ParkingLotTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-07-22T02:58:39" hostname="KAJAL-LAPTOP" time="0.008">
   <properties/>
-  <testcase name="givenVehicle_WhenNotFound_ShouldThrowException" classname="parkinglottddproblem.ParkingLotTest" time="0.01"/>
+  <testcase name="givenVehicle_WhenNotFound_ShouldThrowException" classname="parkinglottddproblem.ParkingLotTest" time="0.008"/>
   <system-out><![CDATA[ vehicle not found
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>

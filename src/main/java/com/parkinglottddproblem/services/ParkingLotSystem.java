@@ -9,6 +9,7 @@ import java.util.stream.IntStream;
 public class ParkingLotSystem {
 private int actualCapacity;
 private List vehicles;
+ParkingBill parkingBill = new ParkingBill();
 private List<ParkingLotObserver> observers;
 
     public ParkingLotSystem(int capacity) {
@@ -22,7 +23,7 @@ private List<ParkingLotObserver> observers;
         observers.add(parkingObservers);
     }
 
-    public void parkVehicle(int slotNumber, String vehicle) throws ParkingLotException {
+    public void parkVehicle(int slotNumber, String vehicle, int arrivingHour) throws ParkingLotException {
         if(isVehicleParked(vehicle))
             throw new ParkingLotException(ParkingLotException.ExceptionType.ALREADY_PARKED, "Vehicle already parked");
 
@@ -32,8 +33,9 @@ private List<ParkingLotObserver> observers;
             }
             throw new ParkingLotException(ParkingLotException.ExceptionType.PARKING_LOT_FULL, "Parking Lot Is Full");
         }
-
+        parkingBill.arrivingHour(arrivingHour);
         this.vehicles.set(slotNumber, vehicle);
+
     }
 
     public Integer getEmptySlots() {
@@ -48,10 +50,11 @@ private List<ParkingLotObserver> observers;
         return this.vehicles.contains(vehicle);
     }
 
-    public boolean unPark(String vehicle) {
+    public boolean unPark(String vehicle, int departingHour) {
         if (vehicle == null) return false;
         if (this.vehicles.contains(vehicle)) {
             this.vehicles.set(this.vehicles.indexOf(vehicle), null);
+            parkingBill.departureHour(departingHour);
             for (ParkingLotObserver observer: observers) {
                 observer.capacityIsAvailable();
             }
