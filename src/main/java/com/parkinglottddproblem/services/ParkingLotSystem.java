@@ -3,40 +3,48 @@ package com.parkinglottddproblem.services;
 import com.parkinglottddproblem.exception.ParkingLotException;
 import com.parkinglottddproblem.observer.ParkingLotObserver;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
 public class ParkingLotSystem {
-private int actualCapacity;
-private List vehicles;
-ParkingBill parkingBill = new ParkingBill();
-private List<ParkingLotObserver> observers;
+    private final int actualCapacity;
+    private final List<ParkingSlot> vehicles;
+    private final List<ParkingLotObserver> observers;
 
     public ParkingLotSystem(int capacity) {
         this.observers = new ArrayList<>();
-        this.vehicles = new ArrayList();
+        this.vehicles = new ArrayList<>();
         this.actualCapacity = capacity;
-        initializeParkingLot();
+        this.initializeParkingLot();
     }
 
     public void register(ParkingLotObserver parkingObservers) {
         observers.add(parkingObservers);
     }
 
-    public void parkVehicle(int slotNumber, String vehicle, int arrivingHour) throws ParkingLotException {
-        if(isVehicleParked(vehicle))
+    public void parkVehicle(String vehicle) throws ParkingLotException {
+        if (isVehicleParked(vehicle))
             throw new ParkingLotException(ParkingLotException.ExceptionType.ALREADY_PARKED, "Vehicle already parked");
 
-        if(this.vehicles.size() == this.actualCapacity && !vehicles.contains(null)) {
-            for (ParkingLotObserver observer: observers) {
+        if (this.vehicles.size() == this.actualCapacity && !vehicles.contains(null)) {
+            for (ParkingLotObserver observer : observers) {
                 observer.capacityIsFull();
             }
             throw new ParkingLotException(ParkingLotException.ExceptionType.PARKING_LOT_FULL, "Parking Lot Is Full");
         }
-        parkingBill.arrivingHour(arrivingHour);
-        this.vehicles.set(slotNumber, vehicle);
+        ParkingSlot parkingSlot = new ParkingSlot(vehicle, LocalTime.now().withNano(0));
+        this.vehicles.set(this.getEmptySlots(), parkingSlot);
+    }
 
+    public LocalTime getParkTime(String vehicle) throws ParkingLotException {
+        for (ParkingSlot slot : vehicles) {
+            if (slot != null && slot.getVehicle() == vehicle) {
+                return slot.getTime();
+            }
+        }
+        throw new ParkingLotException(ParkingLotException.ExceptionType.NOT_FOUND, "vehicle not present");
     }
 
     public Integer getEmptySlots() {
@@ -48,30 +56,33 @@ private List<ParkingLotObserver> observers;
     }
 
     public boolean isVehicleParked(String vehicle) {
-        return this.vehicles.contains(vehicle);
+        return vehicles.stream().anyMatch(slot -> slot != null && slot.getVehicle() == vehicle);
     }
 
-    public boolean unPark(String vehicle, int departingHour) {
+    public boolean unPark(String vehicle) {
         if (vehicle == null) return false;
-        if (this.vehicles.contains(vehicle)) {
-            this.vehicles.set(this.vehicles.indexOf(vehicle), null);
-            parkingBill.departureHour(departingHour);
-            for (ParkingLotObserver observer: observers) {
-                observer.capacityIsAvailable();
+        for (ParkingSlot slot : vehicles) {
+            if (slot != null && slot.getVehicle() == vehicle) {
+                this.vehicles.set(this.vehicles.indexOf(slot), null);
+                for (ParkingLotObserver observer : observers) {
+                    observer.capacityIsAvailable();
+                }
+                return true;
             }
-            return true;
         }
         return false;
     }
 
     public void initializeParkingLot() {
-        this.vehicles = new ArrayList();
         IntStream.range(0, this.actualCapacity).forEach(slots -> vehicles.add(null));
     }
 
-    public int findVehicleLocation(Object vehicle) throws ParkingLotException {
-        if (vehicles.contains(vehicle))
-            return vehicles.indexOf(vehicle);
+    public int findVehicleLocation(String vehicle) throws ParkingLotException {
+        for (ParkingSlot slot : vehicles) {
+            if (slot != null && slot.getVehicle() == vehicle) {
+                return vehicles.indexOf(slot);
+            }
+        }
         throw new ParkingLotException(ParkingLotException.ExceptionType.NOT_FOUND, " vehicle not found");
     }
 }

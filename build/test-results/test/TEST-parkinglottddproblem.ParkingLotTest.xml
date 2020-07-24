@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="parkinglottddproblem.ParkingLotTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2020-07-22T07:28:45" hostname="KAJAL-LAPTOP" time="0.028">
+<testsuite name="parkinglottddproblem.ParkingLotTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2020-07-24T13:58:37" hostname="KAJAL-LAPTOP" time="0.065">
   <properties/>
-  <testcase name="givenVehicle_WhenUnParked_ShouldReturnTrue" classname="parkinglottddproblem.ParkingLotTest" time="0.009"/>
+  <testcase name="givenVehicle_WhenUnParked_ShouldReturnTrue" classname="parkinglottddproblem.ParkingLotTest" time="0.021"/>
+  <testcase name="givenVehicle_WhenParked_ShouldReturnTime" classname="parkinglottddproblem.ParkingLotTest" time="0.0"/>
   <testcase name="givenVehicle_WhenParked_ShouldReturnTrue" classname="parkinglottddproblem.ParkingLotTest" time="0.0"/>
-  <testcase name="givenVehicle_WhenNotFound_ShouldThrowException" classname="parkinglottddproblem.ParkingLotTest" time="0.009"/>
+  <testcase name="givenVehicle_WhenNotFound_ShouldThrowException" classname="parkinglottddproblem.ParkingLotTest" time="0.013"/>
+  <testcase name="givenParkingLot_WhenNotFull_ShouldNotBeRedirectSecurityStaff" classname="parkinglottddproblem.ParkingLotTest" time="0.002"/>
   <testcase name="givenVehicleParked_WhenAlreadyParked_ShouldThrowException" classname="parkinglottddproblem.ParkingLotTest" time="0.001"/>
-  <testcase name="givenWhenLotIsFull_ShouldInformOwner" classname="parkinglottddproblem.ParkingLotTest" time="0.001"/>
+  <testcase name="givenWhenLotIsFull_ShouldInformOwner" classname="parkinglottddproblem.ParkingLotTest" time="0.003"/>
   <testcase name="givenVehicle_ShouldPark_OnAvailableSlot" classname="parkinglottddproblem.ParkingLotTest" time="0.001"/>
-  <testcase name="givenMultipleLots_WhenAdded_ShouldReturnTrue" classname="parkinglottddproblem.ParkingLotTest" time="0.0"/>
-  <testcase name="givenVehicle_WhenParkedShouldFindTheLocation" classname="parkinglottddproblem.ParkingLotTest" time="0.0"/>
-  <testcase name="givenAnotherVehicle_WhenUnParked_ShouldReturnFalse" classname="parkinglottddproblem.ParkingLotTest" time="0.0"/>
-  <testcase name="givenVehicleParked_WhenLotFull_ShouldThrowException" classname="parkinglottddproblem.ParkingLotTest" time="0.001"/>
-  <testcase name="givenParkingLot_WhenFull_ShouldRedirectSecurityStaff" classname="parkinglottddproblem.ParkingLotTest" time="0.001"/>
+  <testcase name="givenVehicle_WhenParkedShouldFindTheLocation" classname="parkinglottddproblem.ParkingLotTest" time="0.001"/>
+  <testcase name="givenAnotherVehicle_WhenUnParked_ShouldReturnFalse" classname="parkinglottddproblem.ParkingLotTest" time="0.001"/>
+  <testcase name="givenVehicleParked_WhenLotFull_ShouldThrowException" classname="parkinglottddproblem.ParkingLotTest" time="0.002"/>
+  <testcase name="givenParkingLot_WhenFull_ShouldRedirectSecurityStaff" classname="parkinglottddproblem.ParkingLotTest" time="0.004"/>
+  <testcase name="givenVehicle_WhenNotParked_ShouldThrowException" classname="parkinglottddproblem.ParkingLotTest" time="0.001"/>
   <testcase name="givenWhenLotIsEmpty_ShouldInformOwner" classname="parkinglottddproblem.ParkingLotTest" time="0.001"/>
-  <testcase name="givenParkingTime_ParkingBillShouldBeGenerated" classname="parkinglottddproblem.ParkingLotTest" time="0.0"/>
   <system-out><![CDATA[ vehicle not found
 Vehicle already parked
 Parking Lot Is Full
