@@ -16,7 +16,7 @@ public class ParkingLotTest {
 
     @Before
     public void setUp() {
-        parkingLotSystem = new ParkingLotSystem(3);
+        parkingLotSystem = new ParkingLotSystem(3, 1);
     }
 
     //UC1 Park the vehicle
@@ -198,4 +198,20 @@ public class ParkingLotTest {
             Assert.assertEquals(ParkingLotException.ExceptionType.NOT_FOUND, e.type);
         }
     }
+
+    //UC9
+    @Test
+    public void givenVehicle_WhenParkedAndUnParkedInLot_ShouldEvenlyDistributed() {
+        ParkingLotSystem parkingLotSystem = new ParkingLotSystem(3, 3);
+        try {
+            parkingLotSystem.parkVehicle("vehicle1");
+            parkingLotSystem.parkVehicle("vehicle2");
+            parkingLotSystem.parkVehicle("vehicle3");
+            parkingLotSystem.parkVehicle("vehicle4");
+            parkingLotSystem.parkVehicle("vehicle5");
+            Assert.assertEquals(parkingLotSystem.parkingLots.get(0).vehicles.get(1).getVehicle(), "vehicle5");
+        } catch(ParkingLotException e) {
+            System.out.println(e.getMessage());
+        }
+}
 }
