@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 public class ParkingLotSystem {
-    public List<ParkingLot> parkingLots;
     private final List<ParkingLotObserver> observers;
+    public List<ParkingLot> parkingLots;
     int lotSize;
     int numberOfLots;
 
@@ -40,9 +40,7 @@ public class ParkingLotSystem {
         }
         ParkingSlot parkingSlot = new ParkingSlot(vehicle, LocalTime.now().withNano(0));
         ParkingLot parkingLot = evenlyDistribution(this.parkingLots);
-        int slotNumber = getEmptySlots(parkingLot);
-        parkingLot.vehicles.set(slotNumber, parkingSlot);
-       // parkingLot.vehicles.set(getEmptySlots(parkingLot), parkingSlot);
+        parkingLot.vehicles.set(getEmptySlots(parkingLot), parkingSlot);
     }
 
     private ParkingLot evenlyDistribution(List<ParkingLot> parkingLot) {
@@ -50,26 +48,13 @@ public class ParkingLotSystem {
         Collections.sort(parkingLotList, Comparator.comparing(ParkingLot::getVehicles));
         return parkingLotList.get(0);
     }
-//
-//    public LocalTime getParkTime(String vehicle) throws ParkingLotException {
-//        for (ParkingSlot slot : vehicles) {
-//            if (slot != null && slot.getVehicle().equals(vehicle)) {
-//                return slot.getTime();
-//            }
-//        }
-//        throw new ParkingLotException(ParkingLotException.ExceptionType.NOT_FOUND, "vehicle not present");
-//    }
-
-
-
-
 
     public LocalTime getParkTime(String vehicle) throws ParkingLotException {
         for (ParkingLot parkingLot : parkingLots) {
-            for(ParkingSlot slot : parkingLot.vehicles)
-            if (slot != null && slot.getVehicle().equals(vehicle)) {
-                return slot.getTime();
-            }
+            for (ParkingSlot slot : parkingLot.vehicles)
+                if (slot != null && slot.getVehicle().equals(vehicle)) {
+                    return slot.getTime();
+                }
         }
         throw new ParkingLotException(ParkingLotException.ExceptionType.NOT_FOUND, "vehicle not present");
     }
@@ -87,66 +72,41 @@ public class ParkingLotSystem {
         for (ParkingLot parkingLot : parkingLots) {
             int vehicles = parkingLot.getVehicles();
             vehicleCount += vehicles;
-            //vehicleCount = vehicleCount + vehicles;
         }
         return lotSize * numberOfLots == vehicleCount;
     }
 
     public boolean isVehicleParked(String vehicle) {
         for (ParkingLot parkingLot : parkingLots) {
-            for(ParkingSlot slot : parkingLot.vehicles)
-           if(slot != null && slot.getVehicle().equals(vehicle))
-               return true;
+            for (ParkingSlot slot : parkingLot.vehicles)
+                if (slot != null && slot.getVehicle().equals(vehicle))
+                    return true;
         }
         return false;
-        //return vehicles.stream().anyMatch(slot -> slot != null && slot.getVehicle() == vehicle);
     }
-
-//    public boolean unPark(String vehicle) {
-//        if (vehicle == null) return false;
-//        for (ParkingSlot slot : vehicles) {
-//            if (slot != null && slot.getVehicle().equals(vehicle)) {
-//                this.vehicles.set(this.vehicles.indexOf(slot), null);
-//                for (ParkingLotObserver observer : observers) {
-//                    observer.capacityIsAvailable();
-//                }
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-
-
 
     public boolean unPark(String vehicle) {
         if (vehicle == null) return false;
         for (ParkingLot parkingLot : parkingLots)
-        for (ParkingSlot slot : parkingLot.vehicles) {
-            if (slot != null && slot.getVehicle().equals(vehicle)) {
-                parkingLot.vehicles.set(parkingLot.vehicles.indexOf(slot), null);
-                for (ParkingLotObserver observer : observers) {
-                    observer.capacityIsAvailable();
+            for (ParkingSlot slot : parkingLot.vehicles) {
+                if (slot != null && slot.getVehicle().equals(vehicle)) {
+                    parkingLot.vehicles.set(parkingLot.vehicles.indexOf(slot), null);
+                    for (ParkingLotObserver observer : observers) {
+                        observer.capacityIsAvailable();
+                    }
+                    return true;
                 }
-                return true;
             }
-        }
         return false;
-    }
-
-
-
-
-    public void initializeParkingLot() {
-//        IntStream.range(0, this.numberOfLots).forEachOrdered(slots -> parkingLots.add(slots, new ParkingLot(this.lotSize)));
     }
 
     public int findVehicleLocation(String vehicle) throws ParkingLotException {
         for (ParkingLot parkingLot : parkingLots)
-        for (ParkingSlot slot : parkingLot.vehicles) {
-            if (slot != null && slot.getVehicle().equals(vehicle)) {
-                return parkingLot.vehicles.indexOf(slot);
+            for (ParkingSlot slot : parkingLot.vehicles) {
+                if (slot != null && slot.getVehicle().equals(vehicle)) {
+                    return parkingLot.vehicles.indexOf(slot);
+                }
             }
-        }
         throw new ParkingLotException(ParkingLotException.ExceptionType.NOT_FOUND, " vehicle not found");
     }
 }
