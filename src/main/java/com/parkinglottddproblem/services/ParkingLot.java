@@ -2,6 +2,7 @@ package com.parkinglottddproblem.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class ParkingLot {
     public final List<ParkingSlot> vehicles;
@@ -15,9 +16,7 @@ public class ParkingLot {
 
     public void initializeParkingLot() {
         int bound = this.lotSize;
-        for (int slots = 0; slots < bound; slots++) {
-            vehicles.add(null);
-        }
+        IntStream.range(0, bound).<ParkingSlot>mapToObj(slots -> null).forEachOrdered(vehicles::add);
     }
 
     public int getVehicles() {

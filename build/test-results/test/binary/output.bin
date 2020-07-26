@@ -1,3 +1,3 @@
- vehicle not found
-Vehicle already parked
-Parking Lot Is Full
+h[ParkingSlot{vehicle='vehicle1', time=12:12:49}, ParkingSlot{vehicle='vehicle4', time=12:12:49}, null]
+h[ParkingSlot{vehicle='vehicle2', time=12:12:49}, ParkingSlot{vehicle='vehicle5', time=12:12:49}, null]
+h[ParkingSlot{vehicle='vehicle3', time=12:12:49}, ParkingSlot{vehicle='vehicle6', time=12:12:49}, null]

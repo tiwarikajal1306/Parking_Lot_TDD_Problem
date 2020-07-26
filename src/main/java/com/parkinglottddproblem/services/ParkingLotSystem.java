@@ -1,5 +1,6 @@
 package com.parkinglottddproblem.services;
 
+import com.parkinglottddproblem.enums.DriverType;
 import com.parkinglottddproblem.exception.ParkingLotException;
 import com.parkinglottddproblem.observer.ParkingLotObserver;
 
@@ -28,26 +29,39 @@ public class ParkingLotSystem {
         observers.add(parkingObservers);
     }
 
-    public void parkVehicle(String vehicle) throws ParkingLotException {
+    public void parkVehicle(String vehicle, DriverType driverType) throws ParkingLotException {
         if (isVehicleParked(vehicle))
             throw new ParkingLotException(ParkingLotException.ExceptionType.ALREADY_PARKED, "Vehicle already parked");
 
-        if (isAnySlotAvailable()) {
+        if (isAnySlotFull()) {
             for (ParkingLotObserver observer : observers) {
                 observer.capacityIsFull();
             }
             throw new ParkingLotException(ParkingLotException.ExceptionType.PARKING_LOT_FULL, "Parking Lot Is Full");
         }
         ParkingSlot parkingSlot = new ParkingSlot(vehicle, LocalTime.now().withNano(0));
-        ParkingLot parkingLot = evenlyDistribution(this.parkingLots);
+        ParkingLot parkingLot = getParkingLotAccordingToDriverType(this.parkingLots, driverType);
         parkingLot.vehicles.set(getEmptySlots(parkingLot), parkingSlot);
     }
 
-    private ParkingLot evenlyDistribution(List<ParkingLot> parkingLot) {
-        List<ParkingLot> parkingLotList = parkingLot;
-        Collections.sort(parkingLotList, Comparator.comparing(ParkingLot::getVehicles));
-        return parkingLotList.get(0);
+    private ParkingLot getParkingLotAccordingToDriverType(List<ParkingLot> parkingLot, DriverType driverType) {
+        if (driverType == DriverType.HANDICAP_DRIVER)
+            for (ParkingLot parkingLot2 : parkingLots) {
+                for (ParkingSlot slot : parkingLot2.vehicles)
+                    if (slot == null) {
+                        return parkingLot2;
+                    }
+            }
+        int minimumIndex = 0;
+        int minimumSize = parkingLots.get(0).getVehicles();
+        for (int slot = 0; slot < parkingLots.size(); slot++)
+            if (parkingLots.get(slot).getVehicles() < minimumSize) {
+                minimumIndex = slot;
+                minimumSize = parkingLots.get(slot).getVehicles();
+            }
+        return parkingLots.get(minimumIndex);
     }
+
 
     public LocalTime getParkTime(String vehicle) throws ParkingLotException {
         for (ParkingLot parkingLot : parkingLots) {
@@ -67,7 +81,7 @@ public class ParkingLotSystem {
         return null;
     }
 
-    public boolean isAnySlotAvailable() {
+    public boolean isAnySlotFull() {
         int vehicleCount = 0;
         for (ParkingLot parkingLot : parkingLots) {
             int vehicles = parkingLot.getVehicles();
