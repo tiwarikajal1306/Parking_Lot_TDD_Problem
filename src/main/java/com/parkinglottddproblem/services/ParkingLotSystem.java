@@ -45,7 +45,7 @@ public class ParkingLotSystem {
 
     private ParkingLot getParkingLotAccordingToDriverTypeAndCarSize(DriverType driverType, Car car) {
         if (car == Car.LARGE_CAR)
-            return this.getParkingLotAccordingToLargeCar(driverType, car);
+            return this.getParkingLotAccordingToLargeCar(driverType);
         if (driverType == DriverType.HANDICAP_DRIVER)
             for (ParkingLot parkingLot : parkingLots) {
                 for (ParkingSlot slot : parkingLot.getList())
@@ -63,12 +63,11 @@ public class ParkingLotSystem {
         return parkingLots.get(minimumIndex);
     }
 
-    public ParkingLot getParkingLotAccordingToLargeCar(DriverType driverType, Car car) {
+    public ParkingLot getParkingLotAccordingToLargeCar(DriverType driverType) {
         if (driverType == DriverType.HANDICAP_DRIVER)
             for (ParkingLot parkingLot : parkingLots) {
-                List<ParkingSlot> list = parkingLot.getList();//if (slot == null)
+                List<ParkingSlot> list = parkingLot.getList();
                 for (int i = 0; i < list.size()-1; i++) {
-                    //for (int j = i+1; j < list.size()-1; j++) {
                         ParkingSlot slot1 = list.get(i+1);
                         ParkingSlot slot = list.get(i);
                         if (slot == null && slot1 == null) {

@@ -245,7 +245,7 @@ public class ParkingLotTest {
     }
     //UC11
     @Test
-    public void givenVehicles_WhenVehicleShouldParkedAccordinglyType_ShouldReturnExpectedSlotNumbers() {
+    public void givenVehicleToPark_WhenDriverIsHandicap_AndCarIsLarge_ShouldReturnExpectedSlotNumbers() {
         ParkingLotSystem parkingLotSystem = new ParkingLotSystem(3, 3);
         try {
             parkingLotSystem.parkVehicle("vehicle1", DriverType.NORMAL_DRIVER, Car.MEDIUM_CAR);
@@ -255,6 +255,23 @@ public class ParkingLotTest {
             parkingLotSystem.parkVehicle("vehicle5", DriverType.HANDICAP_DRIVER, Car.LARGE_CAR);
             String position = parkingLotSystem.vehiclePosition("vehicle5");
             Assert.assertEquals("Lot1 Slot1", position);
+        } catch (ParkingLotException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void givenVehicleToPark_WhenDriverIsHandicap_AndCarIsMedium_ShouldReturnExpectedSlotNumbers() {
+        ParkingLotSystem parkingLotSystem = new ParkingLotSystem(3, 3);
+        try {
+            parkingLotSystem.parkVehicle("vehicle1", DriverType.NORMAL_DRIVER, Car.MEDIUM_CAR);
+            parkingLotSystem.parkVehicle("vehicle2", DriverType.NORMAL_DRIVER, Car.MEDIUM_CAR);
+            parkingLotSystem.parkVehicle("vehicle3", DriverType.NORMAL_DRIVER, Car.MEDIUM_CAR);
+            parkingLotSystem.parkVehicle("vehicle4", DriverType.NORMAL_DRIVER, Car.MEDIUM_CAR);
+            parkingLotSystem.parkVehicle("vehicle5", DriverType.HANDICAP_DRIVER, Car.LARGE_CAR);
+            parkingLotSystem.parkVehicle("vehicle6", DriverType.HANDICAP_DRIVER, Car.MEDIUM_CAR);
+            String position = parkingLotSystem.vehiclePosition("vehicle6");
+            Assert.assertEquals("Lot0 Slot2", position);
         } catch (ParkingLotException e) {
             System.out.println(e.getMessage());
         }
