@@ -6,8 +6,6 @@ import com.parkinglottddproblem.observer.ParkingLotObserver;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -122,5 +120,19 @@ public class ParkingLotSystem {
                 }
             }
         throw new ParkingLotException(ParkingLotException.ExceptionType.NOT_FOUND, " vehicle not found");
+    }
+
+    public String vehiclePosition(String vehicle) {
+        int lot = 0;
+        for (ParkingLot parkingLot : parkingLots) {
+            lot++;
+            for (ParkingSlot slot : parkingLot.vehicles) {
+                if (slot != null && slot.getVehicle().equals(vehicle)) {
+                    int slot1 = parkingLot.vehicles.indexOf(slot);
+                    return "Lot" +lot + " " + "Slot" +slot1;
+                }
+            }
+        }
+        return null;
     }
 }

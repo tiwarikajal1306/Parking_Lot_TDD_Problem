@@ -205,7 +205,7 @@ public class ParkingLotTest {
         ParkingLotSystem parkingLotSystem = new ParkingLotSystem(3, 3);
         try {
             parkingLotSystem.parkVehicle("vehicle1", DriverType.NORMAL_DRIVER);
-            parkingLotSystem.parkVehicle("vehicle2", DriverType.HANDICAP_DRIVER);
+            parkingLotSystem.parkVehicle("vehicle2", DriverType.NORMAL_DRIVER);
             parkingLotSystem.parkVehicle("vehicle3", DriverType.NORMAL_DRIVER);
             parkingLotSystem.parkVehicle("vehicle4", DriverType.NORMAL_DRIVER);
             parkingLotSystem.parkVehicle("vehicle5", DriverType.NORMAL_DRIVER);
@@ -215,7 +215,8 @@ public class ParkingLotTest {
             System.out.println(parkingLotSystem.parkingLots.get(0).vehicles);
             System.out.println(parkingLotSystem.parkingLots.get(1).vehicles);
             System.out.println(parkingLotSystem.parkingLots.get(2).vehicles);
-            Assert.assertEquals(parkingLotSystem.parkingLots.get(1).vehicles.get(0).getVehicle(), "vehicle3");
+            String position = parkingLotSystem.vehiclePosition("vehicle3");
+            Assert.assertEquals("Lot3 Slot0", position);
         } catch (ParkingLotException e) {
             System.out.println(e.getMessage());
         }
@@ -229,15 +230,17 @@ public class ParkingLotTest {
             parkingLotSystem.parkVehicle("vehicle1", DriverType.NORMAL_DRIVER);
             parkingLotSystem.parkVehicle("vehicle2", DriverType.NORMAL_DRIVER);
             parkingLotSystem.parkVehicle("vehicle3", DriverType.NORMAL_DRIVER);
-            parkingLotSystem.parkVehicle("vehicle4", DriverType.NORMAL_DRIVER);
-            parkingLotSystem.parkVehicle("vehicle5", DriverType.NORMAL_DRIVER);
+            parkingLotSystem.unPark("vehicle2");
+            parkingLotSystem.parkVehicle("vehicle4", DriverType.HANDICAP_DRIVER);
+            parkingLotSystem.parkVehicle("vehicle5", DriverType.HANDICAP_DRIVER);
             parkingLotSystem.parkVehicle("vehicle6", DriverType.NORMAL_DRIVER);
             parkingLotSystem.parkVehicle("vehicle7", DriverType.NORMAL_DRIVER);
+            parkingLotSystem.parkVehicle("vehicle8", DriverType.NORMAL_DRIVER);
+            parkingLotSystem.parkVehicle("vehicle9", DriverType.NORMAL_DRIVER);
             parkingLotSystem.unPark("vehicle7");
-            System.out.println(parkingLotSystem.parkingLots.get(0).vehicles);
-            System.out.println(parkingLotSystem.parkingLots.get(1).vehicles);
-            System.out.println(parkingLotSystem.parkingLots.get(2).vehicles);
-            Assert.assertEquals(parkingLotSystem.parkingLots.get(0).vehicles.get(1).getVehicle(), "vehicle4");
+            parkingLotSystem.parkVehicle("vehicleH", DriverType.HANDICAP_DRIVER);
+           String position = parkingLotSystem.vehiclePosition("vehicle4");
+            Assert.assertEquals("Lot1 Slot1", position);
         } catch (ParkingLotException e) {
             System.out.println(e.getMessage());
         }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="parkinglottddproblem.ParkingLotTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-07-26T06:42:49" hostname="KAJAL-LAPTOP" time="0.04">
+<testsuite name="parkinglottddproblem.ParkingLotTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-07-26T07:53:52" hostname="KAJAL-LAPTOP" time="0.063">
   <properties/>
-  <testcase name="givenVehicleToPark_WhenDriverIsHandicap_ShouldParkVehicleAtNearestSpot" classname="parkinglottddproblem.ParkingLotTest" time="0.04"/>
-  <system-out><![CDATA[[ParkingSlot{vehicle='vehicle1', time=12:12:49}, ParkingSlot{vehicle='vehicle4', time=12:12:49}, null]
-[ParkingSlot{vehicle='vehicle2', time=12:12:49}, ParkingSlot{vehicle='vehicle5', time=12:12:49}, null]
-[ParkingSlot{vehicle='vehicle3', time=12:12:49}, ParkingSlot{vehicle='vehicle6', time=12:12:49}, null]
+  <testcase name="givenVehicle_WhenParkedAndUnParkedInLot_ShouldEvenlyDistributed" classname="parkinglottddproblem.ParkingLotTest" time="0.063"/>
+  <system-out><![CDATA[[ParkingSlot{vehicle='vehicle1', time=13:23:52}, ParkingSlot{vehicle='vehicle4', time=13:23:52}, null]
+[ParkingSlot{vehicle='vehicle2', time=13:23:52}, ParkingSlot{vehicle='vehicle5', time=13:23:52}, null]
+[ParkingSlot{vehicle='vehicle3', time=13:23:52}, ParkingSlot{vehicle='vehicle6', time=13:23:52}, null]
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
