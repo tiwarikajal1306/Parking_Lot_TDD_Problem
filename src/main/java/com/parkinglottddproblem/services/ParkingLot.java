@@ -2,29 +2,35 @@ package com.parkinglottddproblem.services;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class ParkingLot {
-    public final List<ParkingSlot> vehicles;
+    private final List<ParkingSlot> parkingSlotList;
     int lotSize;
 
     public ParkingLot(int lotSize) {
         this.lotSize = lotSize;
-        vehicles = new ArrayList<>();
+        parkingSlotList = new ArrayList<>();
         this.initializeParkingLot();
     }
 
     public void initializeParkingLot() {
         int bound = this.lotSize;
-        IntStream.range(0, bound).<ParkingSlot>mapToObj(slots -> null).forEachOrdered(vehicles::add);
+        for (int slots = 0; slots < bound; slots++) {
+            ParkingSlot parkingSlot = null;
+            parkingSlotList.add(parkingSlot);
+        }
     }
 
-    public int getVehicles() {
+    public int getParkingSlotList() {
         int numberOFVehicle = 0;
         for (int i = 0; i < lotSize; i++) {
-            if (vehicles.get(i) != null)
+            if (parkingSlotList.get(i) != null)
                 numberOFVehicle++;
         }
         return numberOFVehicle;
+    }
+
+    public List<ParkingSlot> getList() {
+        return parkingSlotList;
     }
 }
