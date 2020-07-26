@@ -75,7 +75,14 @@ public class ParkingLotSystem {
                         }
                     }
             }
-        return null;
+        int minimumIndex = 0;
+        int minimumSize = parkingLots.get(0).getParkingSlotList();
+        for (int slot = 0; slot < parkingLots.size(); slot++)
+            if (parkingLots.get(slot).getParkingSlotList() < minimumSize) {
+                minimumIndex = slot;
+                minimumSize = parkingLots.get(slot).getParkingSlotList();
+            }
+        return parkingLots.get(minimumIndex);
     }
 
     public LocalTime getParkTime(String vehicle) throws ParkingLotException {

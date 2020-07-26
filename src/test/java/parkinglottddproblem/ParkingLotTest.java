@@ -276,4 +276,22 @@ public class ParkingLotTest {
             System.out.println(e.getMessage());
         }
     }
+
+    @Test
+    public void givenVehicleToPark_WhenDriverIsNormal_AndCarIsLarge_ShouldReturnExpectedSlotNumbers() {
+        ParkingLotSystem parkingLotSystem = new ParkingLotSystem(3, 3);
+        try {
+            parkingLotSystem.parkVehicle("vehicle1", DriverType.NORMAL_DRIVER, Car.MEDIUM_CAR);
+            parkingLotSystem.parkVehicle("vehicle2", DriverType.NORMAL_DRIVER, Car.MEDIUM_CAR);
+            parkingLotSystem.parkVehicle("vehicle3", DriverType.NORMAL_DRIVER, Car.MEDIUM_CAR);
+            parkingLotSystem.parkVehicle("vehicle4", DriverType.NORMAL_DRIVER, Car.MEDIUM_CAR);
+            parkingLotSystem.parkVehicle("vehicle5", DriverType.NORMAL_DRIVER, Car.LARGE_CAR);
+            parkingLotSystem.parkVehicle("vehicle6", DriverType.NORMAL_DRIVER, Car.MEDIUM_CAR);
+            String position = parkingLotSystem.vehiclePosition("vehicle5");
+            Assert.assertEquals("Lot1 Slot1", position);
+        } catch (ParkingLotException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 }
