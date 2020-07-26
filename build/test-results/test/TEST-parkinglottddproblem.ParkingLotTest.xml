@@ -1,28 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="parkinglottddproblem.ParkingLotTest" tests="19" skipped="0" failures="0" errors="0" timestamp="2020-07-26T17:54:55" hostname="KAJAL-LAPTOP" time="0.052">
+<testsuite name="parkinglottddproblem.ParkingLotTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-07-26T22:19:25" hostname="KAJAL-LAPTOP" time="0.039">
   <properties/>
-  <testcase name="givenVehicle_WhenUnParked_ShouldReturnTrue" classname="parkinglottddproblem.ParkingLotTest" time="0.018"/>
-  <testcase name="givenVehicleToPark_WhenDriverIsHandicap_ShouldParkVehicleAtNearestSpot" classname="parkinglottddproblem.ParkingLotTest" time="0.013"/>
-  <testcase name="givenVehicle_WhenParked_ShouldReturnTime" classname="parkinglottddproblem.ParkingLotTest" time="0.0"/>
-  <testcase name="givenVehicle_WhenParked_ShouldReturnTrue" classname="parkinglottddproblem.ParkingLotTest" time="0.0"/>
-  <testcase name="givenVehicle_WhenNotFound_ShouldThrowException" classname="parkinglottddproblem.ParkingLotTest" time="0.005"/>
-  <testcase name="givenParkingLot_WhenNotFull_ShouldNotBeRedirectSecurityStaff" classname="parkinglottddproblem.ParkingLotTest" time="0.001"/>
-  <testcase name="givenVehicleToPark_WhenDriverIsHandicap_AndCarIsLarge_ShouldReturnExpectedSlotNumbers" classname="parkinglottddproblem.ParkingLotTest" time="0.001"/>
-  <testcase name="givenVehicleParked_WhenAlreadyParked_ShouldThrowException" classname="parkinglottddproblem.ParkingLotTest" time="0.001"/>
-  <testcase name="givenWhenLotIsFull_ShouldInformOwner" classname="parkinglottddproblem.ParkingLotTest" time="0.001"/>
-  <testcase name="givenVehicle_ShouldPark_OnAvailableSlot" classname="parkinglottddproblem.ParkingLotTest" time="0.001"/>
-  <testcase name="givenVehicle_WhenParkedAndUnParkedInLot_ShouldEvenlyDistributed" classname="parkinglottddproblem.ParkingLotTest" time="0.0"/>
-  <testcase name="givenVehicle_WhenParkedShouldFindTheLocation" classname="parkinglottddproblem.ParkingLotTest" time="0.0"/>
-  <testcase name="givenAnotherVehicle_WhenUnParked_ShouldReturnFalse" classname="parkinglottddproblem.ParkingLotTest" time="0.0"/>
-  <testcase name="givenVehicleParked_WhenLotFull_ShouldThrowException" classname="parkinglottddproblem.ParkingLotTest" time="0.001"/>
-  <testcase name="givenVehicleToPark_WhenDriverIsNormal_AndCarIsLarge_ShouldReturnExpectedSlotNumbers" classname="parkinglottddproblem.ParkingLotTest" time="0.001"/>
-  <testcase name="givenParkingLot_WhenFull_ShouldRedirectSecurityStaff" classname="parkinglottddproblem.ParkingLotTest" time="0.001"/>
-  <testcase name="givenVehicle_WhenNotParked_ShouldThrowException" classname="parkinglottddproblem.ParkingLotTest" time="0.0"/>
-  <testcase name="givenVehicleToPark_WhenDriverIsHandicap_AndCarIsMedium_ShouldReturnExpectedSlotNumbers" classname="parkinglottddproblem.ParkingLotTest" time="0.0"/>
-  <testcase name="givenWhenLotIsEmpty_ShouldInformOwner" classname="parkinglottddproblem.ParkingLotTest" time="0.001"/>
-  <system-out><![CDATA[ vehicle not found
-Vehicle already parked
-Parking Lot Is Full
-]]></system-out>
+  <testcase name="givenVehicleToPark_WhenHaveWhiteColor_ShouldReturnExpectedSlotNumbers" classname="parkinglottddproblem.ParkingLotTest" time="0.039"/>
+  <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

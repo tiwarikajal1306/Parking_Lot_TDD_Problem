@@ -2,7 +2,9 @@ package com.parkinglottddproblem.services;
 
 import com.parkinglottddproblem.enums.Car;
 import com.parkinglottddproblem.enums.DriverType;
+import com.parkinglottddproblem.enums.VehicleColor;
 import com.parkinglottddproblem.exception.ParkingLotException;
+import com.parkinglottddproblem.model.VehicleDetails;
 import com.parkinglottddproblem.observer.ParkingLotObserver;
 
 import java.time.LocalTime;
@@ -28,8 +30,8 @@ public class ParkingLotSystem {
         observers.add(parkingObservers);
     }
 
-    public void parkVehicle(String vehicle, DriverType driverType, Car car) throws ParkingLotException {
-        if (isVehicleParked(vehicle))
+    public void parkVehicle(VehicleDetails vehicleDetails) throws ParkingLotException {
+        if (isVehicleParked(vehicleDetails.getVehicle()))
             throw new ParkingLotException(ParkingLotException.ExceptionType.ALREADY_PARKED, "Vehicle already parked");
 
         if (isAnySlotFull()) {
@@ -38,15 +40,15 @@ public class ParkingLotSystem {
             }
             throw new ParkingLotException(ParkingLotException.ExceptionType.PARKING_LOT_FULL, "Parking Lot Is Full");
         }
-        ParkingSlot parkingSlot = new ParkingSlot(vehicle, LocalTime.now().withNano(0));
-        ParkingLot parkingLot = getParkingLotAccordingToDriverTypeAndCarSize(driverType, car);
+        ParkingSlot parkingSlot = new ParkingSlot(vehicleDetails, LocalTime.now().withNano(0));
+        ParkingLot parkingLot = getParkingLotAccordingToDriverTypeAndCarSize(vehicleDetails);
         parkingLot.getList().set(getEmptySlots(parkingLot), parkingSlot);
     }
 
-    private ParkingLot getParkingLotAccordingToDriverTypeAndCarSize(DriverType driverType, Car car) {
-        if (car == Car.LARGE_CAR)
-            return this.getParkingLotAccordingToLargeCar(driverType);
-        if (driverType == DriverType.HANDICAP_DRIVER)
+    private ParkingLot getParkingLotAccordingToDriverTypeAndCarSize(VehicleDetails vehicleDetails) {
+        if (vehicleDetails.getVehicleSize() == Car.LARGE_CAR)
+            return this.getParkingLotAccordingToLargeCar(vehicleDetails.getDriverType());
+        if (vehicleDetails.getDriverType() == DriverType.HANDICAP_DRIVER)
             for (ParkingLot parkingLot : parkingLots) {
                 for (ParkingSlot slot : parkingLot.getList())
                     if (slot == null) {
@@ -67,13 +69,13 @@ public class ParkingLotSystem {
         if (driverType == DriverType.HANDICAP_DRIVER)
             for (ParkingLot parkingLot : parkingLots) {
                 List<ParkingSlot> list = parkingLot.getList();
-                for (int i = 0; i < list.size()-1; i++) {
-                        ParkingSlot slot1 = list.get(i+1);
-                        ParkingSlot slot = list.get(i);
-                        if (slot == null && slot1 == null) {
-                            return parkingLot;
-                        }
+                for (int i = 0; i < list.size() - 1; i++) {
+                    ParkingSlot slot1 = list.get(i + 1);
+                    ParkingSlot slot = list.get(i);
+                    if (slot == null && slot1 == null) {
+                        return parkingLot;
                     }
+                }
             }
         int minimumIndex = 0;
         int minimumSize = parkingLots.get(0).getParkingSlotList();
@@ -88,7 +90,7 @@ public class ParkingLotSystem {
     public LocalTime getParkTime(String vehicle) throws ParkingLotException {
         for (ParkingLot parkingLot : parkingLots) {
             for (ParkingSlot slot : parkingLot.getList())
-                if (slot != null && slot.getVehicle().equals(vehicle)) {
+                if (slot != null && slot.getVehicleDetails().getVehicle().equals(vehicle)) {
                     return slot.getTime();
                 }
         }
@@ -115,7 +117,7 @@ public class ParkingLotSystem {
     public boolean isVehicleParked(String vehicle) {
         for (ParkingLot parkingLot : parkingLots) {
             for (ParkingSlot slot : parkingLot.getList())
-                if (slot != null && slot.getVehicle().equals(vehicle))
+                if (slot != null && slot.getVehicleDetails().getVehicle().equals(vehicle))
                     return true;
         }
         return false;
@@ -125,7 +127,7 @@ public class ParkingLotSystem {
         if (vehicle == null) return false;
         for (ParkingLot parkingLot : parkingLots)
             for (ParkingSlot slot : parkingLot.getList()) {
-                if (slot != null && slot.getVehicle().equals(vehicle)) {
+                if (slot != null && slot.getVehicleDetails().getVehicle().equals(vehicle)) {
                     parkingLot.getList().set(parkingLot.getList().indexOf(slot), null);
                     for (ParkingLotObserver observer : observers) {
                         observer.capacityIsAvailable();
@@ -139,7 +141,7 @@ public class ParkingLotSystem {
     public int findVehicleLocation(String vehicle) throws ParkingLotException {
         for (ParkingLot parkingLot : parkingLots)
             for (ParkingSlot slot : parkingLot.getList()) {
-                if (slot != null && slot.getVehicle().equals(vehicle)) {
+                if (slot != null && slot.getVehicleDetails().getVehicle().equals(vehicle)) {
                     return parkingLot.getList().indexOf(slot);
                 }
             }
@@ -150,13 +152,29 @@ public class ParkingLotSystem {
         int lot = 0;
         for (ParkingLot parkingLot : parkingLots) {
             for (ParkingSlot slot : parkingLot.getList()) {
-                if (slot != null && slot.getVehicle().equals(vehicle)) {
+                if (slot != null && slot.getVehicleDetails().getVehicle().equals(vehicle)) {
                     int slot1 = parkingLot.getList().indexOf(slot);
-                    return "Lot" +lot+ " " + "Slot" +slot1;
+                    return "Lot" + lot + " " + "Slot" + slot1;
                 }
             }
             lot++;
         }
         return null;
+    }
+
+    public List<String> getLocationOfWhiteVehicle(VehicleColor vehicleColor) {
+        List<String> whiteColorVehicleLocation = new ArrayList<>();
+        int lot = 0;
+        for (ParkingLot parkingLot : parkingLots) {
+            for (ParkingSlot slot : parkingLot.getList()) {
+                if (slot != null && slot.getVehicleDetails().getColor().equals(vehicleColor)) {
+                    int slot1 = parkingLot.getList().indexOf(slot);
+                    String location = "Lot" + lot + " " + "Slot" + slot1;
+                    whiteColorVehicleLocation.add(location);
+                }
+            }
+            lot++;
+        }
+        return whiteColorVehicleLocation;
     }
 }

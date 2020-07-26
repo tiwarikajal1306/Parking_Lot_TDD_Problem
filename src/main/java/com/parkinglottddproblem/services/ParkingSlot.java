@@ -1,14 +1,16 @@
 package com.parkinglottddproblem.services;
 
+import com.parkinglottddproblem.model.VehicleDetails;
+
 import java.time.LocalTime;
 import java.util.Objects;
 
 public class ParkingSlot {
-    String vehicle;
+    VehicleDetails vehicle;
     LocalTime time;
 
-    public ParkingSlot(String vehicle, LocalTime time) {
-        this.vehicle = vehicle;
+    public ParkingSlot(VehicleDetails vehicleDetails, LocalTime time) {
+        this.vehicle = vehicleDetails;
         this.time = time;
     }
 
@@ -16,7 +18,7 @@ public class ParkingSlot {
         return time;
     }
 
-    public String getVehicle() {
+    public VehicleDetails getVehicleDetails() {
         return vehicle;
     }
 
