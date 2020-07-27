@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="parkinglottddproblem.ParkingLotTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-07-27T20:50:02" hostname="KAJAL-LAPTOP" time="0.062">
+<testsuite name="parkinglottddproblem.ParkingLotTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-07-27T21:15:33" hostname="KAJAL-LAPTOP" time="0.014">
   <properties/>
-  <testcase name="givenParkingLots_WhenFindVehiclesAccordinglySmallVehicleAndHandicapDriverType_ShouldReturnVehicleDetails" classname="parkinglottddproblem.ParkingLotTest" time="0.062"/>
+  <testcase name="givenParingLot_WhenHaveParkedCars_ShouldReturnTotalVehicle" classname="parkinglottddproblem.ParkingLotTest" time="0.014"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

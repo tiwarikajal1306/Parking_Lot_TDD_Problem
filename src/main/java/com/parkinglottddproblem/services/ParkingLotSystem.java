@@ -236,14 +236,25 @@ public class ParkingLotSystem {
                 if (slot != null && slot.getVehicleDetails().getDriverType().equals(driverType) &&
                         slot.getVehicleDetails().getVehicleSize().equals(carSize) && lot1 == lot) {
                     int slot1 = parkingLot.getList().indexOf(slot);
-                    String location = "Lot" + lot + " " + "Slot" + slot1 +" " + slot.getVehicleDetails().getVehicle()
-                            + " " +slot.getVehicleDetails().getDriverType() + " "
-                            +slot.getVehicleDetails().getVehicleSize();
+                    String location = "Lot" + lot + " " + "Slot" + slot1 + " " + slot.getVehicleDetails().getVehicle()
+                            + " " + slot.getVehicleDetails().getDriverType() + " "
+                            + slot.getVehicleDetails().getVehicleSize();
                     vehicleInformation.add(location);
                 }
             }
             lot++;
         }
         return vehicleInformation;
+    }
+
+    public int carCount() {
+        int lot = 0;
+        for (ParkingLot parkingLot : parkingLots) {
+            for (ParkingSlot slot : parkingLot.getList()) {
+                if (slot != null)
+                    lot++;
+            }
+        }
+        return lot;
     }
 }

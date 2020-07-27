@@ -460,4 +460,24 @@ public class ParkingLotTest {
             System.out.println(e.getMessage());
         }
     }
+
+    //UC17
+    @Test
+    public void givenParingLot_WhenHaveParkedCars_ShouldReturnTotalVehicle() {
+        ParkingLotSystem parkingLotSystem = new ParkingLotSystem(3, 3);
+        try {
+            parkingLotSystem.parkVehicle(new VehicleDetails("MH-65-KS-8765", DriverType.HANDICAP_DRIVER,
+                    Car.SMALL_CAR), "AA");
+            parkingLotSystem.parkVehicle(new VehicleDetails("MH-85-KS-7638", DriverType.NORMAL_DRIVER,
+                    Car.SMALL_CAR), "AA");
+            parkingLotSystem.parkVehicle(new VehicleDetails("MH-75-KS-7658", DriverType.HANDICAP_DRIVER,
+                    Car.LARGE_CAR), "AA");
+            parkingLotSystem.parkVehicle(new VehicleDetails("MH-65-KS-7438", DriverType.NORMAL_DRIVER,
+                    Car.SMALL_CAR), "AA");
+            int carCount = parkingLotSystem.carCount();
+            Assert.assertEquals(4, carCount);
+        } catch (ParkingLotException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
