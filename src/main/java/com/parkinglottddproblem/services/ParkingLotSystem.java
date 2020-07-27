@@ -190,8 +190,8 @@ public class ParkingLotSystem {
                 if (slot != null && slot.getVehicleDetails().getColor().equals(vehicleColor) &&
                         slot.getVehicleDetails().getCarCompany().equals(carCompany)) {
                     int slot1 = parkingLot.getList().indexOf(slot);
-                    String information = "Lot" + lot + " " + "Slot" + slot1 +" " + slot.getVehicleDetails().getVehicle()
-                            + " " +slot.getAttendantName();
+                    String information = "Lot" + lot + " " + "Slot" + slot1 + " " + slot.getVehicleDetails().getVehicle()
+                            + " " + slot.getAttendantName();
                     VehicleInformation.add(information);
                 }
             }
@@ -220,6 +220,25 @@ public class ParkingLotSystem {
                 if (slot != null && Duration.between(slot.getTime(), LocalDateTime.now()).toMinutes() <= minutes) {
                     int slot1 = parkingLot.getList().indexOf(slot);
                     String location = "Lot" + lot + " " + "Slot" + slot1;
+                    vehicleInformation.add(location);
+                }
+            }
+            lot++;
+        }
+        return vehicleInformation;
+    }
+
+    public List<String> getVehicleDetailOfGivenDriverTypeAndCarSize(DriverType driverType, Car carSize, int lot) {
+        List<String> vehicleInformation = new ArrayList<>();
+        int lot1 = 0;
+        for (ParkingLot parkingLot : parkingLots) {
+            for (ParkingSlot slot : parkingLot.getList()) {
+                if (slot != null && slot.getVehicleDetails().getDriverType().equals(driverType) &&
+                        slot.getVehicleDetails().getVehicleSize().equals(carSize) && lot1 == lot) {
+                    int slot1 = parkingLot.getList().indexOf(slot);
+                    String location = "Lot" + lot + " " + "Slot" + slot1 +" " + slot.getVehicleDetails().getVehicle()
+                            + " " +slot.getVehicleDetails().getDriverType() + " "
+                            +slot.getVehicleDetails().getVehicleSize();
                     vehicleInformation.add(location);
                 }
             }
