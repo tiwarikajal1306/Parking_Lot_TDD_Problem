@@ -197,4 +197,16 @@ public class ParkingLotSystem {
         }
         return VehicleInformation;
     }
+
+    public int getCountForOneBrandCar(CarCompany carCompany) {
+        int lot = 0;
+        for (ParkingLot parkingLot : parkingLots) {
+            for (ParkingSlot slot : parkingLot.getList()) {
+                if (slot != null && slot.getVehicleDetails().getCarCompany().equals(carCompany)) {
+                    lot++;
+                }
+            }
+        }
+        return lot;
+    }
 }

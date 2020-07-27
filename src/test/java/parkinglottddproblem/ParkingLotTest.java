@@ -398,8 +398,29 @@ public class ParkingLotTest {
                      VehicleColor.WHITE, CarCompany.TATA), "AA");
             parkingLotSystem.parkVehicle(new VehicleDetails("MH-65-KS-8654", DriverType.NORMAL_DRIVER,
                     VehicleColor.BLUE, CarCompany.TATA), "AA");
-            List<String> carDetail = parkingLotSystem.getLocationOfVehicleByGivingColorAndBrand(VehicleColor.BLUE, CarCompany.TOYOTA);
+            List<String> carDetail = parkingLotSystem.getLocationOfVehicleByGivingColorAndBrand(VehicleColor.BLUE,
+                    CarCompany.TOYOTA);
             Assert.assertEquals(Arrays.asList("Lot1 Slot0 MH-68-KS-8776 AA"), carDetail);
+        } catch (ParkingLotException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    //UC14
+    @Test
+    public void givenBMWCar_WhenParked_ShouldReturnTotalCountOFBMWCar() {
+        ParkingLotSystem parkingLotSystem = new ParkingLotSystem(3, 3);
+        try {
+            parkingLotSystem.parkVehicle(new VehicleDetails("MH-65-KS-8765", DriverType.NORMAL_DRIVER,
+                    VehicleColor.NO_COLOR, CarCompany.TATA), "AA");
+            parkingLotSystem.parkVehicle(new VehicleDetails("MH-68-KS-8776", DriverType.NORMAL_DRIVER,
+                    VehicleColor.BLUE, CarCompany.BMW ), "AA");
+            parkingLotSystem.parkVehicle(new VehicleDetails("MH-65-KS-8754", DriverType.NORMAL_DRIVER,
+                    VehicleColor.WHITE, CarCompany.BMW), "AA");
+            parkingLotSystem.parkVehicle(new VehicleDetails("MH-65-KS-8654", DriverType.NORMAL_DRIVER,
+                    VehicleColor.BLUE, CarCompany.TATA), "AA");
+            int carCount = parkingLotSystem.getCountForOneBrandCar(CarCompany.BMW);
+            Assert.assertEquals(2, carCount);
         } catch (ParkingLotException e) {
             System.out.println(e.getMessage());
         }
