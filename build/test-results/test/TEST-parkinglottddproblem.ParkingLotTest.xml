@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="parkinglottddproblem.ParkingLotTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-07-26T22:19:25" hostname="KAJAL-LAPTOP" time="0.039">
+<testsuite name="parkinglottddproblem.ParkingLotTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-07-27T03:08:10" hostname="KAJAL-LAPTOP" time="0.045">
   <properties/>
-  <testcase name="givenVehicleToPark_WhenHaveWhiteColor_ShouldReturnExpectedSlotNumbers" classname="parkinglottddproblem.ParkingLotTest" time="0.039"/>
+  <testcase name="givenToyotaCar_WhenHaveBlueColor_ShouldReturnExpectedLocation" classname="parkinglottddproblem.ParkingLotTest" time="0.045"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

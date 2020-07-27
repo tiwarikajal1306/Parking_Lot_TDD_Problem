@@ -1,5 +1,7 @@
 package com.parkinglottddproblem.services;
 
+import com.parkinglottddproblem.model.ParkingSlot;
+
 import java.util.ArrayList;
 import java.util.List;
 

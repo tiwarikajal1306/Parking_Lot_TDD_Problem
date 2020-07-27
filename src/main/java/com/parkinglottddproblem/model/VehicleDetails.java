@@ -1,13 +1,15 @@
 package com.parkinglottddproblem.model;
 
 import com.parkinglottddproblem.enums.Car;
+import com.parkinglottddproblem.enums.CarCompany;
 import com.parkinglottddproblem.enums.DriverType;
 import com.parkinglottddproblem.enums.VehicleColor;
 
 public class VehicleDetails {
     private final String vehicle;
     private final DriverType driverType;
-    private final Car car;
+    private Car car;
+    private CarCompany carCompany;
 
     public VehicleColor getColor() {
         return color;
@@ -28,6 +30,13 @@ public class VehicleDetails {
         this.color = color;
     }
 
+    public VehicleDetails(String vehicle, DriverType driverType, VehicleColor color, CarCompany carCompany) {
+        this.vehicle = vehicle;
+        this.driverType = driverType;
+        this.color = color;
+        this.carCompany = carCompany;
+    }
+
     public String getVehicle() {
         return vehicle;
     }
@@ -38,5 +47,13 @@ public class VehicleDetails {
 
     public Car getVehicleSize() {
         return car;
+    }
+
+    public CarCompany getCarCompany() {
+        return carCompany;
+    }
+
+    public VehicleColor getCarColor() {
+        return color;
     }
 }

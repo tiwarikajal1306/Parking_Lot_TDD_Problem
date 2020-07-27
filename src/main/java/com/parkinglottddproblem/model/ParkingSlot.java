@@ -1,6 +1,4 @@
-package com.parkinglottddproblem.services;
-
-import com.parkinglottddproblem.model.VehicleDetails;
+package com.parkinglottddproblem.model;
 
 import java.time.LocalTime;
 import java.util.Objects;
@@ -8,10 +6,12 @@ import java.util.Objects;
 public class ParkingSlot {
     VehicleDetails vehicle;
     LocalTime time;
+    String attendantName;
 
-    public ParkingSlot(VehicleDetails vehicleDetails, LocalTime time) {
+    public ParkingSlot(VehicleDetails vehicleDetails, LocalTime time, String attendantName) {
         this.vehicle = vehicleDetails;
         this.time = time;
+        this.attendantName = attendantName;
     }
 
     public LocalTime getTime() {
@@ -20,6 +20,10 @@ public class ParkingSlot {
 
     public VehicleDetails getVehicleDetails() {
         return vehicle;
+    }
+
+    public String getAttendantName() {
+        return attendantName;
     }
 
     @Override

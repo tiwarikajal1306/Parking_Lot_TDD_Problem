@@ -1,9 +1,11 @@
 package com.parkinglottddproblem.services;
 
 import com.parkinglottddproblem.enums.Car;
+import com.parkinglottddproblem.enums.CarCompany;
 import com.parkinglottddproblem.enums.DriverType;
 import com.parkinglottddproblem.enums.VehicleColor;
 import com.parkinglottddproblem.exception.ParkingLotException;
+import com.parkinglottddproblem.model.ParkingSlot;
 import com.parkinglottddproblem.model.VehicleDetails;
 import com.parkinglottddproblem.observer.ParkingLotObserver;
 
@@ -30,7 +32,7 @@ public class ParkingLotSystem {
         observers.add(parkingObservers);
     }
 
-    public void parkVehicle(VehicleDetails vehicleDetails) throws ParkingLotException {
+    public void parkVehicle(VehicleDetails vehicleDetails, String attendantName) throws ParkingLotException {
         if (isVehicleParked(vehicleDetails.getVehicle()))
             throw new ParkingLotException(ParkingLotException.ExceptionType.ALREADY_PARKED, "Vehicle already parked");
 
@@ -40,7 +42,7 @@ public class ParkingLotSystem {
             }
             throw new ParkingLotException(ParkingLotException.ExceptionType.PARKING_LOT_FULL, "Parking Lot Is Full");
         }
-        ParkingSlot parkingSlot = new ParkingSlot(vehicleDetails, LocalTime.now().withNano(0));
+        ParkingSlot parkingSlot = new ParkingSlot(vehicleDetails, LocalTime.now().withNano(0), attendantName);
         ParkingLot parkingLot = getParkingLotAccordingToDriverTypeAndCarSize(vehicleDetails);
         parkingLot.getList().set(getEmptySlots(parkingLot), parkingSlot);
     }
@@ -176,5 +178,23 @@ public class ParkingLotSystem {
             lot++;
         }
         return whiteColorVehicleLocation;
+    }
+
+    public List<String> getLocationOfVehicleByGivingColorAndBrand(VehicleColor vehicleColor, CarCompany carCompany) {
+        List<String> VehicleInformation = new ArrayList<>();
+        int lot = 0;
+        for (ParkingLot parkingLot : parkingLots) {
+            for (ParkingSlot slot : parkingLot.getList()) {
+                if (slot != null && slot.getVehicleDetails().getColor().equals(vehicleColor) &&
+                        slot.getVehicleDetails().getCarCompany().equals(carCompany)) {
+                    int slot1 = parkingLot.getList().indexOf(slot);
+                    String information = "Lot" + lot + " " + "Slot" + slot1 +" " + slot.getVehicleDetails().getVehicle()
+                            + " " +slot.getAttendantName();
+                    VehicleInformation.add(information);
+                }
+            }
+            lot++;
+        }
+        return VehicleInformation;
     }
 }
