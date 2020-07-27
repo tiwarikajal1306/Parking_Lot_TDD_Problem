@@ -425,4 +425,20 @@ public class ParkingLotTest {
             System.out.println(e.getMessage());
         }
     }
+
+    //UC15
+    @Test
+    public void givenVehiclesParked_WhenFindVehicleParkedInLast30Minutes_ShouldReturnVehicleSlotNumber() {
+        ParkingLotSystem parkingLotSystem = new ParkingLotSystem(3, 3);
+        try {
+            parkingLotSystem.parkVehicle(new VehicleDetails("MH-65-KS-8765", DriverType.NORMAL_DRIVER,
+                    VehicleColor.NO_COLOR, CarCompany.TATA), "AA");
+            parkingLotSystem.parkVehicle(new VehicleDetails("MH-68-KS-8776", DriverType.NORMAL_DRIVER,
+                    VehicleColor.BLUE, CarCompany.BMW ), "AA");
+            List<String> vehicleDetail = parkingLotSystem.getVehicleDetailOfGivenTime(30);
+            Assert.assertEquals(Arrays.asList("Lot0 Slot0", "Lot1 Slot0"), vehicleDetail);
+        } catch (ParkingLotException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

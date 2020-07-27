@@ -9,6 +9,8 @@ import com.parkinglottddproblem.model.ParkingSlot;
 import com.parkinglottddproblem.model.VehicleDetails;
 import com.parkinglottddproblem.observer.ParkingLotObserver;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -208,5 +210,21 @@ public class ParkingLotSystem {
             }
         }
         return lot;
+    }
+
+    public List<String> getVehicleDetailOfGivenTime(int minutes) {
+        List<String> vehicleInformation = new ArrayList<>();
+        int lot = 0;
+        for (ParkingLot parkingLot : parkingLots) {
+            for (ParkingSlot slot : parkingLot.getList()) {
+                if (slot != null && Duration.between(slot.getTime(), LocalDateTime.now()).toMinutes() <= minutes) {
+                    int slot1 = parkingLot.getList().indexOf(slot);
+                    String location = "Lot" + lot + " " + "Slot" + slot1;
+                    vehicleInformation.add(location);
+                }
+            }
+            lot++;
+        }
+        return vehicleInformation;
     }
 }
