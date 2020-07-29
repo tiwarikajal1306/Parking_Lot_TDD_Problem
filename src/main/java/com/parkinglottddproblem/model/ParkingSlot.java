@@ -34,12 +34,4 @@ public class ParkingSlot {
         return Objects.equals(vehicle, that.vehicle) &&
                 Objects.equals(time, that.time);
     }
-
-    @Override
-    public String toString() {
-        return "ParkingSlot{" +
-                "vehicle='" + vehicle + '\'' +
-                ", time=" + time +
-                '}';
-    }
 }

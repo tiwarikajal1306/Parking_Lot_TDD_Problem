@@ -1,6 +1,6 @@
 package com.parkinglottddproblem.model;
 
-import com.parkinglottddproblem.enums.Car;
+import com.parkinglottddproblem.enums.CarSize;
 import com.parkinglottddproblem.enums.CarCompany;
 import com.parkinglottddproblem.enums.DriverType;
 import com.parkinglottddproblem.enums.VehicleColor;
@@ -8,7 +8,7 @@ import com.parkinglottddproblem.enums.VehicleColor;
 public class VehicleDetails {
     private final String vehicle;
     private final DriverType driverType;
-    private Car car;
+    private CarSize carSize;
     private CarCompany carCompany;
 
     public VehicleColor getColor() {
@@ -17,16 +17,16 @@ public class VehicleDetails {
 
     private VehicleColor color;
 
-    public VehicleDetails(String vehicle,  DriverType driverType,  Car car) {
+    public VehicleDetails(String vehicle,  DriverType driverType,  CarSize carSize) {
         this.vehicle = vehicle;
         this.driverType = driverType;
-        this.car = car;
+        this.carSize = carSize;
     }
 
-    public VehicleDetails(String vehicle, DriverType driverType, Car car, VehicleColor color) {
+    public VehicleDetails(String vehicle, DriverType driverType, CarSize carSize, VehicleColor color) {
         this.vehicle = vehicle;
         this.driverType = driverType;
-        this.car = car;
+        this.carSize = carSize;
         this.color = color;
     }
 
@@ -45,15 +45,11 @@ public class VehicleDetails {
         return driverType;
     }
 
-    public Car getVehicleSize() {
-        return car;
+    public CarSize getVehicleSize() {
+        return carSize;
     }
 
     public CarCompany getCarCompany() {
         return carCompany;
-    }
-
-    public VehicleColor getCarColor() {
-        return color;
     }
 }

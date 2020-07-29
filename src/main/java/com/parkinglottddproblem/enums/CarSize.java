@@ -1,6 +1,6 @@
 package com.parkinglottddproblem.enums;
 
-public enum Car {
+public enum CarSize {
 
     SMALL_CAR, LARGE_CAR
 

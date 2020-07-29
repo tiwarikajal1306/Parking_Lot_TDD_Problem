@@ -1,7 +1,7 @@
 package com.parkinglottddproblem.services;
 
-import com.parkinglottddproblem.enums.Car;
 import com.parkinglottddproblem.enums.CarCompany;
+import com.parkinglottddproblem.enums.CarSize;
 import com.parkinglottddproblem.enums.DriverType;
 import com.parkinglottddproblem.enums.VehicleColor;
 import com.parkinglottddproblem.exception.ParkingLotException;
@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.IntStream;
 
 public class ParkingLotSystem {
@@ -50,7 +51,7 @@ public class ParkingLotSystem {
     }
 
     private ParkingLot getParkingLotAccordingToDriverTypeAndCarSize(VehicleDetails vehicleDetails) {
-        if (vehicleDetails.getVehicleSize() == Car.LARGE_CAR)
+        if (vehicleDetails.getVehicleSize() == CarSize.LARGE_CAR)
             return this.getParkingLotAccordingToLargeCar(vehicleDetails.getDriverType());
         if (vehicleDetails.getDriverType() == DriverType.HANDICAP_DRIVER)
             for (ParkingLot parkingLot : parkingLots) {
@@ -144,11 +145,9 @@ public class ParkingLotSystem {
 
     public int findVehicleLocation(String vehicle) throws ParkingLotException {
         for (ParkingLot parkingLot : parkingLots)
-            for (ParkingSlot slot : parkingLot.getList()) {
-                if (slot != null && slot.getVehicleDetails().getVehicle().equals(vehicle)) {
+            for (ParkingSlot slot : parkingLot.getList())
+                if (slot != null && slot.getVehicleDetails().getVehicle().equals(vehicle))
                     return parkingLot.getList().indexOf(slot);
-                }
-            }
         throw new ParkingLotException(ParkingLotException.ExceptionType.NOT_FOUND, " vehicle not found");
     }
 
@@ -201,15 +200,9 @@ public class ParkingLotSystem {
     }
 
     public int getCountForOneBrandCar(CarCompany carCompany) {
-        int lot = 0;
-        for (ParkingLot parkingLot : parkingLots) {
-            for (ParkingSlot slot : parkingLot.getList()) {
-                if (slot != null && slot.getVehicleDetails().getCarCompany().equals(carCompany)) {
-                    lot++;
-                }
-            }
-        }
-        return lot;
+        return parkingLots.stream().mapToInt(parkingLot -> (int) parkingLot.getList().stream().
+                filter(slot -> slot != null && slot.getVehicleDetails().
+                        getCarCompany().equals(carCompany)).count()).sum();
     }
 
     public List<String> getVehicleDetailOfGivenTime(int minutes) {
@@ -228,7 +221,7 @@ public class ParkingLotSystem {
         return vehicleInformation;
     }
 
-    public List<String> getVehicleDetailOfGivenDriverTypeAndCarSize(DriverType driverType, Car carSize, int lot) {
+    public List<String> getVehicleDetailOfGivenDriverTypeAndCarSize(DriverType driverType, CarSize carSize, int lot) {
         List<String> vehicleInformation = new ArrayList<>();
         int lot1 = 0;
         for (ParkingLot parkingLot : parkingLots) {
@@ -248,13 +241,7 @@ public class ParkingLotSystem {
     }
 
     public int carCount() {
-        int lot = 0;
-        for (ParkingLot parkingLot : parkingLots) {
-            for (ParkingSlot slot : parkingLot.getList()) {
-                if (slot != null)
-                    lot++;
-            }
-        }
-        return lot;
+        return parkingLots.stream().mapToInt(parkingLot -> (int) parkingLot.getList().stream().
+                filter(Objects::nonNull).count()).sum();
     }
 }
