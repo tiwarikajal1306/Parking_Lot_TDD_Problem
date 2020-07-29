@@ -8,6 +8,7 @@ import com.parkinglottddproblem.exception.ParkingLotException;
 import com.parkinglottddproblem.model.ParkingSlot;
 import com.parkinglottddproblem.model.VehicleDetails;
 import com.parkinglottddproblem.observer.ParkingLotObserver;
+import com.parkinglottddproblem.strategy.AllotmentFactory;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -46,50 +47,8 @@ public class ParkingLotSystem {
             throw new ParkingLotException(ParkingLotException.ExceptionType.PARKING_LOT_FULL, "Parking Lot Is Full");
         }
         ParkingSlot parkingSlot = new ParkingSlot(vehicleDetails, LocalTime.now().withNano(0), attendantName);
-        ParkingLot parkingLot = getParkingLotAccordingToDriverTypeAndCarSize(vehicleDetails);
+        ParkingLot parkingLot = new AllotmentFactory().lotAllotment(vehicleDetails).getLotAllotment(parkingLots);
         parkingLot.getList().set(getEmptySlots(parkingLot), parkingSlot);
-    }
-
-    private ParkingLot getParkingLotAccordingToDriverTypeAndCarSize(VehicleDetails vehicleDetails) {
-        if (vehicleDetails.getVehicleSize() == CarSize.LARGE_CAR)
-            return this.getParkingLotAccordingToLargeCar(vehicleDetails.getDriverType());
-        if (vehicleDetails.getDriverType() == DriverType.HANDICAP_DRIVER)
-            for (ParkingLot parkingLot : parkingLots) {
-                for (ParkingSlot slot : parkingLot.getList())
-                    if (slot == null) {
-                        return parkingLot;
-                    }
-            }
-        int minimumIndex = 0;
-        int minimumSize = parkingLots.get(0).getParkingSlotList();
-        for (int slot = 0; slot < parkingLots.size(); slot++)
-            if (parkingLots.get(slot).getParkingSlotList() < minimumSize) {
-                minimumIndex = slot;
-                minimumSize = parkingLots.get(slot).getParkingSlotList();
-            }
-        return parkingLots.get(minimumIndex);
-    }
-
-    public ParkingLot getParkingLotAccordingToLargeCar(DriverType driverType) {
-        if (driverType == DriverType.HANDICAP_DRIVER)
-            for (ParkingLot parkingLot : parkingLots) {
-                List<ParkingSlot> list = parkingLot.getList();
-                for (int i = 0; i < list.size() - 1; i++) {
-                    ParkingSlot slot1 = list.get(i + 1);
-                    ParkingSlot slot = list.get(i);
-                    if (slot == null && slot1 == null) {
-                        return parkingLot;
-                    }
-                }
-            }
-        int minimumIndex = 0;
-        int minimumSize = parkingLots.get(0).getParkingSlotList();
-        for (int slot = 0; slot < parkingLots.size(); slot++)
-            if (parkingLots.get(slot).getParkingSlotList() < minimumSize) {
-                minimumIndex = slot;
-                minimumSize = parkingLots.get(slot).getParkingSlotList();
-            }
-        return parkingLots.get(minimumIndex);
     }
 
     public LocalTime getParkTime(String vehicle) throws ParkingLotException {
